@@ -66,3 +66,5 @@ udr:
   enabled: true
   mongodb:
     enabled: false
+abac:
+  enabled: true

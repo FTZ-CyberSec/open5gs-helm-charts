@@ -113,3 +113,8 @@ dependencies:
     repository: file://../open5gs-webui
     condition: webui.enabled
     alias: webui
+  - name: open5gs-abac
+    version: ~2.2.0
+    repository: file://../open5gs-abac
+    condition: abac.enabled
+    alias: abac
