@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "mioty-mqtt.fullname" . }}-config
+data:
+  mosquitto.conf: |
+    listener 1883
+    allow_anonymous true
+    # Für TLS-Verbindung:
+    #listener 8883
+    #cafile /path/to/ca.crt
+    #certfile /path/to/server.crt
+    #keyfile /path/to/server.key
