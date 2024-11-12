@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mioty-mqtt.fullname" . }}
+  labels:
+    {{- include "mioty-mqtt.selectorLabels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+      protocol: TCP
+      name: mqtt
+    - port: {{ .Values.service.tlsPort }}
+      targetPort: {{ .Values.service.tlsPort }}
+      protocol: TCP
+      name: mqtt-tls
+  selector:
+    {{- include "mioty-mqtt.selectorLabels" . | nindent 4 }}

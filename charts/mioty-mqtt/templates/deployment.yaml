@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mioty-mqtt.fullname" . }}
+  labels:
+    {{- include "mioty-mqtt.selectorLabels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "mioty-mqtt.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "mioty-mqtt.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: mioty-mqtt
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+            - containerPort: {{ .Values.service.tlsPort }}
+          volumeMounts:
+            - name: config-volume
+              mountPath: /mosquitto/config/mosquitto.conf  # Für Mosquitto anpassen
+              subPath: mosquitto.conf
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ include "mioty-mqtt.fullname" . }}-config

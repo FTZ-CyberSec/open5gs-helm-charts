@@ -1,0 +1,10 @@
+apiVersion: v2
+name: mioty-mqtt
+description: Helm chart for deploying an MQTT v5 broker
+version: 1.0.0
+appVersion: "2.0"  # Set to match your MQTT broker version
+
+
+
+
+

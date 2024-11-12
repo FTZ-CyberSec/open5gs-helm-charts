@@ -1,0 +1,23 @@
+image:
+  repository: emqx/emqx  # Oder 'emqx/emqx' für EMQX
+  tag: latest
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+service:
+  type: LoadBalancer
+  port: 1883  # MQTT Port für Nicht-TLS
+  tlsPort: 8883  # MQTT Port für TLS
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

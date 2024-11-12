@@ -1,0 +1,17 @@
+apiVersion: v2
+appVersion: "2.7.2"
+description: >
+  Helm chart to deploy Open5gs ABAC service on Kubernetes.
+name: open5gs-abac
+version: 2.2.5
+annotations:
+  artifacthub.io/category: networking
+keywords:
+  - network
+  - ngc
+dependencies:
+  - name: common
+    repository: https://charts.bitnami.com/bitnami
+    tags:
+      - bitnami-common
+    version: 1.x.x
