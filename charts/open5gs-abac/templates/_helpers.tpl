@@ -49,7 +49,12 @@ Selector labels
 app.kubernetes.io/name: {{ include "open5gs-abac.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-
+{{/*
+Return the proper Docker Image Registry Secret Names
+*/}}
+{{- define "open5gs.abac.imagePullSecrets" -}}
+{{- include "common.images.pullSecrets" (dict "images" (list .Values.image ) "global" .Values.global) -}}
+{{- end -}}
 {{/*
 Create the name of the service account to use
 */}}
