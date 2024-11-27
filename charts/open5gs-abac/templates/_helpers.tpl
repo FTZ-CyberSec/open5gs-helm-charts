@@ -1,9 +1,20 @@
 {{/*
 Expand the name of the chart.
 */}}
+
+{{- define "open5gs.abac.image" -}}
+{{- include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) -}}
+{{- end -}}
 {{- define "open5gs-abac.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
+
+{{/*
+Return the proper Docker Image Registry Secret Names
+*/}}
+{{- define "open5gs.abac.imagePullSecrets" -}}
+{{- include "common.images.pullSecrets" (dict "images" (list .Values.image ) "global" .Values.global) -}}
+{{- end -}}
 
 {{/*
 Create a default fully qualified app name.
@@ -52,16 +63,13 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{/*
 Return the proper Docker Image Registry Secret Names
 */}}
-{{- define "open5gs.abac.imagePullSecrets" -}}
-{{- include "common.images.pullSecrets" (dict "images" (list .Values.image ) "global" .Values.global) -}}
-{{- end -}}
 {{/*
 Create the name of the service account to use
 */}}
 {{- define "open5gs-abac.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "open5gs-abac.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
-{{- end }}
+{{- if .Values.serviceAccount.create -}}
+    {{ default (include "open5gs-abac.fullname" .) .Values.serviceAccount.name }}
+{{- else -}}
+    {{ default "default" .Values.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
