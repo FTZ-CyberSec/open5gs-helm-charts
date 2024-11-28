@@ -17,6 +17,8 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
+customOpen5gsConfig: {}
+
 serviceAccount:
   create: false
   name: abac-service-account
