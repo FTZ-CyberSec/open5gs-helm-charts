@@ -63,3 +63,5 @@ udm:
   enabled: true
 udr:
   enabled: true
+abac:
+  enabled: true
